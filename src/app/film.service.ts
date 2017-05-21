@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs/Observable';
+
+const API_KEY = '520bbe17';
 
 @Injectable()
 export class FilmService {
-  searchUrl: string = "http://www.omdbapi.com/?page=1&s=";
-  filmUrl: string = "http://www.omdbapi.com/?i=";
-  
+  searchUrl = `http://www.omdbapi.com/?apiKey=${API_KEY}&page=1&s=`;
+  filmUrl = `http://www.omdbapi.com/?apiKey=${API_KEY}&i=`;
+
   constructor(private http: Http) { }
 
   private extractListData(res: Response) {
-    let body = res.json();
+    const body = res.json();
     return body.Search || {};
   }
 
   private extractItemData(res: Response) {
-    let body = res.json();
+    const body = res.json();
     return body || {};
   }
 
